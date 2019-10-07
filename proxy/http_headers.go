@@ -23,6 +23,11 @@ func addResponseHeaders(w http.ResponseWriter, r *http.Request, cfg config.Proxy
 		w.Header().Set("Strict-Transport-Security", sts)
 	}
 
+    // q2token gets changed to Q2token and breaks our mobile apps
+	if r.Header.Get("Q2Token") != "" {
+    	r.Header["Q2token"] = []string{"q2token"}		
+	}
+
 	return nil
 }
 
